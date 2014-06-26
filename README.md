@@ -16,3 +16,9 @@ Run the server
     $ node server.js
 
 Visit [http://localhost:4000](http://localhost:4000) in your web browser.
+
+## Run the tests
+
+Install Node.js and npm: https://github.com/isaacs/npm
+
+    $ node tests/client_tests.js

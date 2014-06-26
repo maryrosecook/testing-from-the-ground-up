@@ -1,14 +1,20 @@
 ;(function(exports) {
-  exports.loadTime = function() {
+  var get = exports.get = function(url, callback) {
     var request = new XMLHttpRequest();
-    request.onload = function(data) {
-      var time = JSON.parse(data.target.responseText).time;
-      var color = time === "day" ? "blue" : "black";
-      renderer.fillBackground(color);
-    };
-
-    request.open("GET", "/time.json", true);
+    request.onload = callback;
+    request.open("GET", url, true);
     request.send();
+  };
+
+  exports.getTime = function(callback) {
+    exports.get("/time.json", function(data) {
+      callback(JSON.parse(data.target.responseText).time);
+    });
+  };
+
+  exports.displayTime = function(time) {
+    var color = time === "day" ? "blue" : "black";
+    renderer.fillBackground(color);
   };
 
   var renderer = exports.renderer = {
